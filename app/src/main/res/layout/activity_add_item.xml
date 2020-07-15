@@ -38,12 +38,15 @@
         android:layout_centerVertical="true"
         >
 
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:paddingRight="5.4dp"
-           android:textColor="@color/white_four"
-           android:text="@string/add_button_checkbox"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="5.4dp"
+            android:layout_gravity="center"
+            android:textColor="@color/white_four"
+            android:background="@drawable/btn_checkbox"
+            />
 
         <Button
             android:id="@+id/add_button"

@@ -4,4 +4,5 @@
     <string name="edittext_price_hint">Цена</string>
     <string name="add_button_title">Добавить</string>
     <string name="add_button_checkbox">\u2713</string>
+    <string name="go_to_additemactivity">Go to AddItemActivity</string>
 </resources>

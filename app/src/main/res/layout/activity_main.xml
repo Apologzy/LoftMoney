@@ -10,7 +10,7 @@
         android:id="@+id/btn_go_to_add_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go to AddItemActivity"
+        android:text="@string/go_to_additemactivity"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
