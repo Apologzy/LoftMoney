@@ -1,20 +1,20 @@
 package com.shapor.loftmoney;
 
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 public class AddItemActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
-        Window window = getWindow();
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     @Override
@@ -25,6 +25,7 @@ public class AddItemActivity extends AppCompatActivity {
             finish();
         } catch(Exception e) {
             //default
+            Log.e("TAG E", e.getMessage());
         }
     }
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="btn_add14">14sp</dimen>
+    <dimen name="edt_price42">24sp</dimen>
+    <dimen name="edt_height48">48dp</dimen>
+    <dimen name="edt_width223">223dp</dimen>
+    <dimen name="linlay_mg_start33">33dp</dimen>
+    <dimen name="linlay_mg_end104">104dp</dimen>
+    <dimen name="linlay_mg_bottom61">61dp</dimen>
+    <dimen name="tv_mg_top19">19dp</dimen>
+    <dimen name="tv_mg_bottom32">32dp</dimen>
+    <dimen name="tv_text_size36">36sp</dimen>
+    <dimen name="btn_pd_left10">10dp</dimen>
+    <dimen name="btn_pd_end10">10dp</dimen>
+</resources>

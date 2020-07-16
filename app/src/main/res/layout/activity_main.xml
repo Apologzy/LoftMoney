@@ -25,10 +25,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="19dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginTop="@dimen/tv_mg_top19"
+            android:layout_marginBottom="@dimen/tv_mg_bottom32"
             android:text="@string/main_text_name"
-            android:textSize="36sp"
+            android:textSize="@dimen/tv_text_size36"
             android:textColor="@color/whit_two"
             />
 
@@ -41,8 +41,8 @@
             android:background="@drawable/btn_start_fin_press"
             android:text="@string/go_to_additemactivity"
             android:textColor="@color/lightish_blue"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:paddingStart="@dimen/btn_pd_left10"
+            android:paddingEnd="@dimen/btn_pd_end10"
             android:textAllCaps="false"
              />
 

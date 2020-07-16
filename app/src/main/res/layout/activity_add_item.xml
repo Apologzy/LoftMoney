@@ -11,14 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginStart="33dp"
-        android:layout_marginEnd="104dp"
-        android:layout_marginBottom="61dp">
+        android:layout_marginStart="@dimen/linlay_mg_start33"
+        android:layout_marginEnd="@dimen/linlay_mg_end104"
+        android:layout_marginBottom="@dimen/linlay_mg_bottom61">
 
         <EditText
-            android:layout_width="223dp"
-            android:layout_height="48dp"
-            android:textSize="24sp"
+            android:layout_width="@dimen/edt_width223"
+            android:layout_height="@dimen/edt_height48"
+            android:textSize="@dimen/edt_price42"
             android:textStyle="normal"
             android:fontFamily="sans-serif"
             android:lineSpacingExtra="0sp"
@@ -31,9 +31,9 @@
         />
 
         <EditText
-            android:layout_width="223dp"
-            android:layout_height="48dp"
-            android:textSize="24sp"
+            android:layout_width="@dimen/edt_width223"
+            android:layout_height="@dimen/edt_height48"
+            android:textSize="@dimen/edt_price42"
             android:textStyle="normal"
             android:fontFamily="sans-serif"
             android:lineSpacingExtra="0sp"
@@ -57,26 +57,20 @@
         >
 
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5.4dp"
-            android:layout_gravity="center"
-            android:textColor="@color/white_four"
-            android:background="@drawable/btn_checkbox"
-            />
+
 
         <Button
             android:id="@+id/add_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add_button_title"
-            android:textSize="14sp"
+            android:textSize="@dimen/btn_add14"
             android:fontFamily="sans-serif-medium"
             android:textStyle="normal"
             android:background="@null"
             android:textAllCaps="true"
             android:textColor="@color/white_three"
+            android:drawableStart="@drawable/btn_checkbox"
             />
 
     </LinearLayout>
