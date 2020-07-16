@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnGoToAddItem;
+    protected Button btnGoToAddItem;
     private long backPressedTime;
     private Toast backToast;
 

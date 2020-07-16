@@ -7,4 +7,7 @@
     <color name="white">#dbdbdb</color>
     <color name="white_four">#e3e3e3</color>
     <color name="black95">#95000000</color>
+    <color name="black65">#65000000</color>
+    <color name="lightish_blue">#3574fa</color>
+    <color name="whit_two">#ffffff</color>
 </resources>
