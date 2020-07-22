@@ -16,6 +16,7 @@
         android:layout_marginBottom="@dimen/linlay_mg_bottom61">
 
         <EditText
+            android:id="@+id/name_edittext"
             android:layout_width="@dimen/edt_width223"
             android:layout_height="@dimen/edt_height48"
             android:textSize="@dimen/edt_price42"
@@ -24,6 +25,7 @@
             android:lineSpacingExtra="0sp"
             android:textColorHint="@color/white"
             android:backgroundTint="@color/white"
+            android:textColor="@android:color/black"
             android:textCursorDrawable="@drawable/black95_cursor"
             android:inputType="text"
             android:autofillHints="@string/edittext_name_hint"
@@ -31,6 +33,7 @@
         />
 
         <EditText
+            android:id="@+id/price_edittext"
             android:layout_width="@dimen/edt_width223"
             android:layout_height="@dimen/edt_height48"
             android:textSize="@dimen/edt_price42"
@@ -39,6 +42,7 @@
             android:lineSpacingExtra="0sp"
             android:textColorHint="@color/white"
             android:backgroundTint="@color/white"
+            android:textColor="@android:color/black"
             android:textCursorDrawable="@drawable/black95_cursor"
             android:inputType="text"
             android:autofillHints="@string/edittext_name_hint"

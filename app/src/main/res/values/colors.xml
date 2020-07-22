@@ -11,4 +11,7 @@
     <color name="lightish_blue">#3574fa</color>
     <color name="whit_two">#ffffff</color>
     <color name="blue_md400">#3D5AFE</color>
+    <color name="expenseColor">#4A90E2</color>
+    <color name="incomeColor">#7ED321</color>
+    <color name="dividerColor">#F2F2F2</color>
 </resources>

@@ -6,4 +6,6 @@
     <string name="add_button_checkbox">\u2713</string>
     <string name="go_to_additemactivity">Go to AddItemActivity</string>
     <string name="main_text_name">LoftMoney</string>
+    <string name="expenses">Expenses</string>
+    <string name="income">Income</string>
 </resources>
