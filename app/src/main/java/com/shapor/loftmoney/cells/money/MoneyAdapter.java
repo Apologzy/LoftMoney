@@ -30,6 +30,11 @@ public class MoneyAdapter extends RecyclerView.Adapter<MoneyAdapter.MoneyViewHol
         notifyDataSetChanged();
     }
 
+    public void clearData() {
+        moneyCellModels.clear();
+        notifyDataSetChanged();
+    }
+
     public void addData(List<MoneyCellModel> moneyCellModels) {
         this.moneyCellModels.addAll(moneyCellModels);
         notifyDataSetChanged();

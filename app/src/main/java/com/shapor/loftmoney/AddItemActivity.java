@@ -31,7 +31,6 @@ public class AddItemActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String name = mNameEditText.getText().toString();
                 String price = mPriceEditText.getText().toString();
-
                 if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(price)) {
                     try {
                         setResult(

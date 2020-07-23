@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 
 import com.google.android.material.tabs.TabLayout;
 import com.shapor.loftmoney.cells.money.MoneyAdapter;
@@ -20,8 +21,8 @@ import java.util.List;
 
 public class MainScreen extends AppCompatActivity {
 
-    TabLayout tabLayout;
-    ViewPager viewPager;
+    public static TabLayout tabLayout;
+    public static ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +37,8 @@ public class MainScreen extends AppCompatActivity {
         tabLayout.getTabAt(0).setText(R.string.expenses);
         tabLayout.getTabAt(1).setText(R.string.income);
 
-    }
 
+    }
 
 
 }

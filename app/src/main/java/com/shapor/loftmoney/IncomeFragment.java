@@ -1,6 +1,5 @@
 package com.shapor.loftmoney;
 
-import androidx.fragment.app.Fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,11 +11,10 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.material.tabs.TabLayout;
 import com.shapor.loftmoney.cells.money.MoneyAdapter;
 import com.shapor.loftmoney.cells.money.MoneyAdapterClick;
 import com.shapor.loftmoney.cells.money.MoneyCellModel;
@@ -24,15 +22,11 @@ import com.shapor.loftmoney.cells.money.MoneyCellModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BudgetFragment extends Fragment {
+public class IncomeFragment extends Fragment {
     private static final int REQUEST_CODE = 100;
     private MoneyAdapter moneyAdapter;
     Button callAddButton;
     RecyclerView recyclerView;
-    private int currentTab;
-    public BudgetFragment(int currentTab) {
-        this.currentTab = currentTab;
-    }
 
     @Nullable
     @Override
@@ -67,11 +61,10 @@ public class BudgetFragment extends Fragment {
                 false));
 
 
-        moneyAdapter.addData(generateExpenses());
+        moneyAdapter.addData(generateIncome());
 
         return view;
     }
-
 
 
     private List<MoneyCellModel> generateExpenses() {
@@ -103,7 +96,7 @@ public class BudgetFragment extends Fragment {
 
 
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            if (currentTab == 0) {
+            if (MainScreen.tabLayout.getSelectedTabPosition() == 0) {
                 moneyAdapter.addItem(new MoneyCellModel(data.getStringExtra("name"), price, R.color.expenseColor));
             }
             else if (MainScreen.tabLayout.getSelectedTabPosition() == 1) {
