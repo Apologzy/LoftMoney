@@ -14,9 +14,14 @@ public class BudgetPagerAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-
-        return new BudgetFragment(position);
-
+        switch (position) {
+            case 0:
+                return new ExpensesFragment();
+            case 1:
+                return new IncomeFragment();
+            default:
+                return null;
+        }
     }
 
     @Override

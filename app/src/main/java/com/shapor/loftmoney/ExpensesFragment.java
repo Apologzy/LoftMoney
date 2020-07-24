@@ -9,14 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.material.tabs.TabLayout;
 import com.shapor.loftmoney.cells.money.MoneyAdapter;
 import com.shapor.loftmoney.cells.money.MoneyAdapterClick;
 import com.shapor.loftmoney.cells.money.MoneyCellModel;
@@ -24,15 +24,12 @@ import com.shapor.loftmoney.cells.money.MoneyCellModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BudgetFragment extends Fragment {
+public class ExpensesFragment extends Fragment {
     private static final int REQUEST_CODE = 100;
     private MoneyAdapter moneyAdapter;
-    Button callAddButton;
+    ImageButton callAddButton;
     RecyclerView recyclerView;
-    private int currentTab;
-    public BudgetFragment(int currentTab) {
-        this.currentTab = currentTab;
-    }
+
 
     @Nullable
     @Override
@@ -82,14 +79,6 @@ public class BudgetFragment extends Fragment {
         return moneyCellModels;
     }
 
-    private List<MoneyCellModel> generateIncome() {
-        List<MoneyCellModel> moneyCellModels = new ArrayList<>();
-        moneyCellModels.add(new MoneyCellModel("Зарплата.Июнь", "70000 Р", R.color.incomeColor));
-        moneyCellModels.add(new MoneyCellModel("Премия", "7000 Р", R.color.incomeColor));
-        moneyCellModels.add(new MoneyCellModel("Олег наконец-то вернул долг", "300000 Р", R.color.incomeColor));
-        return moneyCellModels;
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -101,14 +90,10 @@ public class BudgetFragment extends Fragment {
             Log.e("TAG E", e.getMessage());
         }
 
-
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            if (currentTab == 0) {
-                moneyAdapter.addItem(new MoneyCellModel(data.getStringExtra("name"), price, R.color.expenseColor));
-            }
-            else if (MainScreen.tabLayout.getSelectedTabPosition() == 1) {
-                moneyAdapter.addItem(new MoneyCellModel(data.getStringExtra("name"), price, R.color.incomeColor));
-            }
+
+            moneyAdapter.addItem(new MoneyCellModel(data.getStringExtra("name"), price, R.color.expenseColor));
+
         }
     }
 }

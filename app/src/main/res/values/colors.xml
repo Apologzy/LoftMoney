@@ -7,11 +7,14 @@
     <color name="white">#dbdbdb</color>
     <color name="white_four">#e3e3e3</color>
     <color name="black95">#95000000</color>
-    <color name="black65">#65000000</color>
+    <color name="black30">#30000000</color>
     <color name="lightish_blue">#3574fa</color>
     <color name="whit_two">#ffffff</color>
     <color name="blue_md400">#3D5AFE</color>
     <color name="expenseColor">#4A90E2</color>
     <color name="incomeColor">#7ED321</color>
     <color name="dividerColor">#F2F2F2</color>
+    <color name="marigold">#ffc107</color>
+    <color name="perrywinkle_70">#b38baaef</color>
+
 </resources>

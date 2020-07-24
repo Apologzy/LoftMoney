@@ -7,12 +7,27 @@
     android:orientation="vertical"
     tools:context=".MainScreen">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:paddingStart="25dp"
+        android:textColor="@color/whit_two"
+        android:text="@string/budget_accounting"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium"
+        android:background="@color/lightish_blue"
+        android:gravity="center_vertical"/>
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:tabTextColor="@android:color/white"/>
+        android:background="@color/lightish_blue"
+        app:tabIndicatorColor="@color/marigold"
+        app:tabIndicatorHeight="2dp"
+        app:tabTextColor="@color/perrywinkle_70"
+        app:tabSelectedTextColor="@color/whit_two"
+        />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"

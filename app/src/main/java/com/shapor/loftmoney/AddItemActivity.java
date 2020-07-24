@@ -51,7 +51,7 @@ public class AddItemActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         try {
-            Intent intent = new Intent(AddItemActivity.this, MainActivity.class);
+            Intent intent = new Intent(AddItemActivity.this, MainScreen.class);
             startActivity(intent);
             finish();
         } catch(Exception e) {

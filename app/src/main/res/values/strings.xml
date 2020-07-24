@@ -4,8 +4,10 @@
     <string name="edittext_price_hint">Price</string>
     <string name="add_button_title">Add</string>
     <string name="add_button_checkbox">\u2713</string>
-    <string name="go_to_additemactivity">Go to AddItemActivity</string>
+    <string name="go_to_additemactivity">START</string>
     <string name="main_text_name">LoftMoney</string>
     <string name="expenses">Expenses</string>
     <string name="income">Income</string>
+    <string name="mscr_btn_add">Add button</string>
+    <string name="budget_accounting">Budget accounting</string>
 </resources>

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +26,7 @@ import java.util.List;
 public class IncomeFragment extends Fragment {
     private static final int REQUEST_CODE = 100;
     private MoneyAdapter moneyAdapter;
-    Button callAddButton;
+    ImageButton callAddButton;
     RecyclerView recyclerView;
 
     @Nullable
@@ -67,14 +68,6 @@ public class IncomeFragment extends Fragment {
     }
 
 
-    private List<MoneyCellModel> generateExpenses() {
-        List<MoneyCellModel> moneyCellModels = new ArrayList<>();
-        moneyCellModels.add(new MoneyCellModel("Молоко", "70 Р", R.color.expenseColor));
-        moneyCellModels.add(new MoneyCellModel("Зубная щетка", "70 Р", R.color.expenseColor));
-        moneyCellModels.add(new MoneyCellModel("Сковородка с антипригарным покрытием", "1670 Р", R.color.expenseColor));
-        return moneyCellModels;
-    }
-
     private List<MoneyCellModel> generateIncome() {
         List<MoneyCellModel> moneyCellModels = new ArrayList<>();
         moneyCellModels.add(new MoneyCellModel("Зарплата.Июнь", "70000 Р", R.color.incomeColor));
@@ -94,14 +87,10 @@ public class IncomeFragment extends Fragment {
             Log.e("TAG E", e.getMessage());
         }
 
-
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            if (MainScreen.tabLayout.getSelectedTabPosition() == 0) {
-                moneyAdapter.addItem(new MoneyCellModel(data.getStringExtra("name"), price, R.color.expenseColor));
-            }
-            else if (MainScreen.tabLayout.getSelectedTabPosition() == 1) {
-                moneyAdapter.addItem(new MoneyCellModel(data.getStringExtra("name"), price, R.color.incomeColor));
-            }
+
+            moneyAdapter.addItem(new MoneyCellModel(data.getStringExtra("name"), price, R.color.incomeColor));
+
         }
     }
 }
