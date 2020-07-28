@@ -1,10 +1,26 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/blue_md400</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AddItemActTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="AddMscreenTheme" parent="Theme.AppCompat.DayNight">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/lightish_blue</item>
+        <item name="colorPrimaryDark">@color/blue_md400</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 
 </resources>

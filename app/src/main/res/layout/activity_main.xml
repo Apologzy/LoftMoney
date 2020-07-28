@@ -1,18 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lightish_blue"
     tools:context=".MainActivity">
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/loft_money_icon"
+            android:contentDescription="@string/app_name"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tv_mg_top19"
+            android:layout_marginBottom="@dimen/tv_mg_bottom32"
+            android:text="@string/main_text_name"
+            android:textSize="@dimen/tv_text_size36"
+            android:textColor="@color/whit_two"
+            />
+
+        <Button
+            android:id="@+id/btn_go_to_add_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_start_fin_press"
+            android:text="@string/go_to_additemactivity"
+            android:textColor="@color/lightish_blue"
+            android:paddingStart="@dimen/btn_pd_left10"
+            android:paddingEnd="@dimen/btn_pd_end10"
+            android:textAllCaps="false"
+             />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
