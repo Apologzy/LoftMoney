@@ -1,37 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainScreen">
 
-    <TextView
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:paddingStart="25dp"
-        android:textColor="@color/whit_two"
-        android:text="@string/budget_accounting"
-        android:textSize="20sp"
-        android:fontFamily="sans-serif-medium"
-        android:background="@color/lightish_blue"
-        android:gravity="center_vertical"/>
+        android:layout_height="wrap_content">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/lightish_blue"
-        app:tabIndicatorColor="@color/marigold"
-        app:tabIndicatorHeight="2dp"
-        app:tabTextColor="@color/perrywinkle_70"
-        app:tabSelectedTextColor="@color/whit_two"
-        />
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:paddingStart="25dp"
+            app:titleTextColor="@color/whit_two"
+            app:title="@string/budget_accounting"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-medium"
+            android:background="@color/lightish_blue"
+            app:layout_scrollFlags="scroll|snap"
+            android:gravity="center_vertical"/>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/lightish_blue"
+            app:tabIndicatorColor="@color/marigold"
+            app:tabIndicatorHeight="2dp"
+            app:tabTextColor="@color/perrywinkle_70"
+            app:tabSelectedTextColor="@color/whit_two"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-</LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mscreen_btn_add"
+        android:backgroundTint="@color/marigold"
+        android:layout_gravity="bottom|end"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

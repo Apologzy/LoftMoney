@@ -23,9 +23,9 @@
             android:textStyle="normal"
             android:fontFamily="sans-serif"
             android:lineSpacingExtra="0sp"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/expenseColor"
             android:backgroundTint="@color/white"
-            android:textColor="@android:color/black"
+            android:textColor="@color/expenseColor"
             android:textCursorDrawable="@drawable/black95_cursor"
             android:inputType="text"
             android:autofillHints="@string/edittext_name_hint"
@@ -40,9 +40,9 @@
             android:textStyle="normal"
             android:fontFamily="sans-serif"
             android:lineSpacingExtra="0sp"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/expenseColor"
             android:backgroundTint="@color/white"
-            android:textColor="@android:color/black"
+            android:textColor="@color/expenseColor"
             android:textCursorDrawable="@drawable/black95_cursor"
             android:inputType="text"
             android:autofillHints="@string/edittext_name_hint"
@@ -61,7 +61,12 @@
         >
 
 
-
+        <TextView
+            android:id="@+id/loadingView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="Идет загрука..."/>
 
         <Button
             android:id="@+id/add_button"
@@ -73,7 +78,8 @@
             android:textStyle="normal"
             android:background="@null"
             android:textAllCaps="true"
-            android:textColor="@color/white_three"
+            android:enabled="false"
+            android:textColor="@color/incomeColor"
             android:drawableStart="@drawable/btn_checkbox"
             />
 
