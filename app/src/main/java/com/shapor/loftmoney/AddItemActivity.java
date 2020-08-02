@@ -3,9 +3,10 @@ package com.shapor.loftmoney;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
+
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -14,10 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.shapor.loftmoney.cells.money.MoneyCellModel;
+import androidx.appcompat.app.AppCompatActivity;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -64,14 +63,11 @@ public class AddItemActivity extends AppCompatActivity {
             Log.e("TAG ERR", e.getMessage());
         }
 
+        inputTextColor();
 
         configureInputViews();
 
-        if (fragType.equals("expense")) {
-            configureExpenseAdding();
-        } else if (fragType.equals("income")) {
-            configureIncomeAdding();
-        }
+        configureExpenseAdding();
 
 
     }
@@ -88,7 +84,7 @@ public class AddItemActivity extends AppCompatActivity {
                 setUI(true);
                 String token = getSharedPreferences(getString(R.string.app_name), 0).getString(LoftApp.TOKEN_KEY, "");
 
-                Disposable disposable = ((LoftApp) getApplication()).getMoneyApi().addMoney(token, value, name, "expense")
+                Disposable disposable = ((LoftApp) getApplication()).getMoneyApi().addMoney(token, value, name, fragType)
                         .subscribeOn(Schedulers.computation())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Action() {
@@ -114,38 +110,6 @@ public class AddItemActivity extends AppCompatActivity {
         });
     }
 
-    private void configureIncomeAdding() {
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setUI(true);
-                String token = getSharedPreferences(getString(R.string.app_name), 0).getString(LoftApp.TOKEN_KEY, "");
-
-                Disposable disposable = ((LoftApp) getApplication()).getMoneyApi().addMoney(token, value, name, "income")
-                        .subscribeOn(Schedulers.computation())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Action() {
-                            @Override
-                            public void run() throws Exception {
-                                setUI(false);
-                                Log.e("TAG", "Complete");
-                                Toast.makeText(getApplicationContext(), "Add successful", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(AddItemActivity.this, MainScreen.class));
-                                finish();
-                            }
-                        }, new Consumer<Throwable>() {
-                            @Override
-                            public void accept(Throwable throwable) throws Exception {
-                                Log.e("TAG", throwable.getLocalizedMessage());
-                                Toast.makeText(getApplicationContext(), "Added was not successful because "
-                                        + throwable.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                compositeDisposable.add(disposable);
-
-            }
-        });
-    }
 
     private void configureInputViews() {
 
@@ -189,38 +153,37 @@ public class AddItemActivity extends AppCompatActivity {
 
     private void checkInputs() {
         boolean isEnabled = value != null && !value.isEmpty() && name != null && !name.isEmpty();
-
+        inputBtnAddColor(isEnabled);
         addButton.setEnabled(isEnabled);
     }
 
-    /*
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == REQUEST_CODE) {
-            try {
-                activeIndex = data.getStringExtra("activeIndex");
-                Log.e("TEST", activeIndex);
-                if(activeIndex.equals("0")) {
-                    fragType = "expense";
-                } else if (activeIndex.equals("1")) {
-                    fragType = "income";
-                }
-
-                Log.e("TEST", fragType);
-            } catch (Exception e) {
-                Log.e("TAG E", e.getMessage());
-            }
+    private void inputBtnAddColor(boolean isEnabled) {
+        Drawable imgDrawResources;
+        if (!isEnabled) {
+            addButton.setTextColor(getResources().getColor(R.color.white_gray));
+            imgDrawResources = getResources().getDrawable(R.drawable.btn_checkbox_white);
+            addButton.setCompoundDrawablesWithIntrinsicBounds(imgDrawResources,null,null,null);
+        } else {
+            addButton.setTextColor(getResources().getColor(R.color.incomeColor));
+            imgDrawResources = getResources().getDrawable(R.drawable.btn_checkbox);
+            addButton.setCompoundDrawablesWithIntrinsicBounds(imgDrawResources,null,null,null);
         }
-
-
-
     }
 
-     */
-
-
+    private void inputTextColor () {
+        if (fragType.equals("expense")) {
+            mPriceEditText.setTextColor(getResources().getColor(R.color.expenseColor));
+            mPriceEditText.setHintTextColor(getResources().getColor(R.color.expenseColor));
+            mNameEditText.setTextColor(getResources().getColor(R.color.expenseColor));
+            mNameEditText.setHintTextColor(getResources().getColor(R.color.expenseColor));
+        } else {
+            mPriceEditText.setTextColor(getResources().getColor(R.color.incomeColor));
+            mPriceEditText.setHintTextColor(getResources().getColor(R.color.incomeColor));
+            mNameEditText.setTextColor(getResources().getColor(R.color.incomeColor));
+            mNameEditText.setHintTextColor(getResources().getColor(R.color.incomeColor));
+        }
+    }
 
 
     @Override

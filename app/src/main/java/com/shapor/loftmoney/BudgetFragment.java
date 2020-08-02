@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,17 +34,11 @@ public class BudgetFragment extends Fragment {
     public String fragmentType;
     public static final int REQUEST_CODE = 100;
     private MoneyAdapter moneyAdapter;
-    ImageButton callAddButton;
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    /*
-    public BudgetFragment(String fragmentType) {
-        this.fragmentType = fragmentType;
-    }
 
-     */
 
     public static BudgetFragment newInstance(String fragmentType) {
         BudgetFragment fragment = new BudgetFragment();
@@ -71,7 +64,6 @@ public class BudgetFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_budget,null);
-        //callAddButton = view.findViewById(R.id.call_add_item_activity);
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         recyclerView = view.findViewById(R.id.costsRecyclerView);
@@ -80,11 +72,7 @@ public class BudgetFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (fragmentType.equals("expense")) {
-                    generateExpenses();
-                } else if (fragmentType.equals("income")) {
-                    generateIncome();
-                }
+                generateExpenses();
             }
         });
 
@@ -114,7 +102,7 @@ public class BudgetFragment extends Fragment {
 
         String token = ((LoftApp) getActivity().getApplication()).getSharedPreferences().getString(LoftApp.TOKEN_KEY, "");
 
-        Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getMoney(token,"expense")
+        Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getMoney(token, fragmentType)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<MoneyItem>>() {
@@ -136,7 +124,7 @@ public class BudgetFragment extends Fragment {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         swipeRefreshLayout.setRefreshing(false);
-                        Log.e("TAG", "Error " + throwable);
+                        Log.e("TAG", "Error " + throwable.getLocalizedMessage());
                     }
                 });
 
@@ -144,47 +132,12 @@ public class BudgetFragment extends Fragment {
 
     }
 
-    private void generateIncome() {
-        List<MoneyCellModel> moneyCellModels = new ArrayList<>();
-
-        String token = ((LoftApp) getActivity().getApplication()).getSharedPreferences().getString(LoftApp.TOKEN_KEY, "");
-
-        Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getMoney(token,"income")
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<MoneyItem>>() {
-                    @Override
-                    public void accept(List<MoneyItem> moneyItems) throws Exception {
-                        swipeRefreshLayout.setRefreshing(false);
-                        for (MoneyItem moneyItem : moneyItems) {
-                            moneyCellModels.add(MoneyCellModel.getInstance(moneyItem));
-                        }
-
-                        moneyAdapter.setData(moneyCellModels);
-
-                        Log.e("TAG", "Success " + moneyItems);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        swipeRefreshLayout.setRefreshing(false);
-                        Log.e("TAG", "Error " + throwable);
-                    }
-                });
-
-        compositeDisposable.add(disposable);
-
-    }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        if (fragmentType.equals("expense")) {
-            generateExpenses();
-        } else if (fragmentType.equals("income")) {
-            generateIncome();
-        }
+        generateExpenses();
 
     }
 

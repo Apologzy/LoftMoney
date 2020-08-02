@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.shapor.loftmoney.screens.login.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
