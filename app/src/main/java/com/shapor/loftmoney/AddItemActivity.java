@@ -3,6 +3,7 @@ package com.shapor.loftmoney;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +18,9 @@ import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -29,6 +33,8 @@ import io.reactivex.schedulers.Schedulers;
 public class AddItemActivity extends AppCompatActivity {
     EditText mNameEditText;
     EditText mPriceEditText;
+    TextInputLayout mNameInputLayout;
+    TextInputLayout mPriceInputLayout;
     Button addButton;
     TextView loadingView;
     String fragType;
@@ -48,6 +54,8 @@ public class AddItemActivity extends AppCompatActivity {
 
         mNameEditText = findViewById(R.id.name_edittext);
         mPriceEditText = findViewById(R.id.price_edittext);
+        mNameInputLayout = findViewById(R.id.inputLayoutName);
+        mPriceInputLayout = findViewById(R.id.inputLayoutPrice);
         addButton = findViewById(R.id.add_button);
         loadingView = findViewById(R.id.loadingView);
 
@@ -171,13 +179,26 @@ public class AddItemActivity extends AppCompatActivity {
         }
     }
 
+
     private void inputTextColor () {
+
+        ColorStateList colorStateListExpense = ColorStateList.valueOf(getResources().getColor(R.color.expenseColor));
+        ColorStateList colorStateListIncome = ColorStateList.valueOf(getResources().getColor(R.color.incomeColor));
+
         if (fragType.equals("expense")) {
+            mNameInputLayout.setHintTextColor(colorStateListExpense);
+            mNameInputLayout.setDefaultHintTextColor(colorStateListExpense);
+            mPriceInputLayout.setHintTextColor(colorStateListExpense);
+            mPriceInputLayout.setDefaultHintTextColor(colorStateListExpense);
             mPriceEditText.setTextColor(getResources().getColor(R.color.expenseColor));
             mPriceEditText.setHintTextColor(getResources().getColor(R.color.expenseColor));
             mNameEditText.setTextColor(getResources().getColor(R.color.expenseColor));
             mNameEditText.setHintTextColor(getResources().getColor(R.color.expenseColor));
         } else {
+            mNameInputLayout.setHintTextColor(colorStateListIncome);
+            mNameInputLayout.setDefaultHintTextColor(colorStateListIncome);
+            mPriceInputLayout.setHintTextColor(colorStateListIncome);
+            mPriceInputLayout.setDefaultHintTextColor(colorStateListIncome);
             mPriceEditText.setTextColor(getResources().getColor(R.color.incomeColor));
             mPriceEditText.setHintTextColor(getResources().getColor(R.color.incomeColor));
             mNameEditText.setTextColor(getResources().getColor(R.color.incomeColor));

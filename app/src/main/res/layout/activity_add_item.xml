@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/whit_two"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/whit_two">
 
     <LinearLayout
         android:layout_above="@id/linlay_grav"
@@ -15,39 +14,59 @@
         android:layout_marginEnd="@dimen/linlay_mg_end104"
         android:layout_marginBottom="@dimen/linlay_mg_bottom61">
 
-        <EditText
-            android:id="@+id/name_edittext"
-            android:layout_width="@dimen/edt_width223"
-            android:layout_height="@dimen/edt_height48"
-            android:textSize="@dimen/edt_price42"
-            android:textStyle="normal"
-            android:fontFamily="sans-serif"
-            android:lineSpacingExtra="0sp"
-            android:textColorHint="@color/expenseColor"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/expenseColor"
-            android:textCursorDrawable="@drawable/black95_cursor"
-            android:inputType="text"
-            android:autofillHints="@string/edittext_name_hint"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:hint="@string/edittext_name_hint"
-        />
-
-        <EditText
-            android:id="@+id/price_edittext"
-            android:layout_width="@dimen/edt_width223"
-            android:layout_height="@dimen/edt_height48"
-            android:textSize="@dimen/edt_price42"
-            android:textStyle="normal"
-            android:fontFamily="sans-serif"
-            android:lineSpacingExtra="0sp"
+            app:hintTextColor="@color/expenseColor"
             android:textColorHint="@color/expenseColor"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/expenseColor"
-            android:textCursorDrawable="@drawable/black95_cursor"
-            android:inputType="text"
-            android:autofillHints="@string/edittext_name_hint"
-            android:hint="@string/edittext_price_hint"
-        />
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name_edittext"
+                android:layout_width="@dimen/edt_width223"
+                android:layout_height="@dimen/edt_height48"
+                android:textSize="@dimen/edt_price42"
+                android:textStyle="normal"
+                android:fontFamily="sans-serif"
+                android:lineSpacingExtra="0sp"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/expenseColor"
+                android:textCursorDrawable="@drawable/black95_cursor"
+                android:inputType="text"
+                android:autofillHints="@string/edittext_name_hint"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/expenseColor"
+            app:hintTextColor="@color/expenseColor"
+            android:hint="@string/edittext_price_hint">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/price_edittext"
+                android:layout_width="@dimen/edt_width223"
+                android:layout_height="@dimen/edt_height48"
+                android:textSize="@dimen/edt_price42"
+                android:textStyle="normal"
+                android:fontFamily="sans-serif"
+                android:lineSpacingExtra="0sp"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/expenseColor"
+                android:textCursorDrawable="@drawable/black95_cursor"
+                android:inputType="numberDecimal"
+                android:autofillHints="@string/edittext_price_hint"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
 
     </LinearLayout>
 

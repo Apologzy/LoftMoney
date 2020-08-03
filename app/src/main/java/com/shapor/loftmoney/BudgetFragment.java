@@ -87,10 +87,9 @@ public class BudgetFragment extends Fragment {
         });
 
         recyclerView.setAdapter(moneyAdapter);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,
                 false));
-
-
 
 
         return view;
@@ -114,7 +113,7 @@ public class BudgetFragment extends Fragment {
                         for (MoneyItem moneyItem : moneyItems) {
                             moneyCellModels.add(MoneyCellModel.getInstance(moneyItem));
                         }
-                        Collections.reverse(moneyCellModels);
+                        //Collections.reverse(moneyCellModels);
                         moneyAdapter.setData(moneyCellModels);
 
                         Log.e("TAG", "Success " + moneyItems);
