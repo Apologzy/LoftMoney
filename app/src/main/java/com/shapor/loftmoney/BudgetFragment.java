@@ -20,6 +20,7 @@ import com.shapor.loftmoney.cells.money.MoneyCellModel;
 import com.shapor.loftmoney.remote.MoneyItem;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -113,7 +114,7 @@ public class BudgetFragment extends Fragment {
                         for (MoneyItem moneyItem : moneyItems) {
                             moneyCellModels.add(MoneyCellModel.getInstance(moneyItem));
                         }
-
+                        Collections.reverse(moneyCellModels);
                         moneyAdapter.setData(moneyCellModels);
 
                         Log.e("TAG", "Success " + moneyItems);
