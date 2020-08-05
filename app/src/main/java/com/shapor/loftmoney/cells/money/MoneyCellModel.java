@@ -9,6 +9,7 @@ public class MoneyCellModel {
     private String name;
     private String value;
     private Integer color;
+    private int id;
 
     public MoneyCellModel(String name, String value, Integer color) {
         this.name = name;
@@ -20,6 +21,10 @@ public class MoneyCellModel {
         return new MoneyCellModel(moneyItem.getName(),
                 moneyItem.getPrice() + " ₽",
                 moneyItem.getType().equals("expense") ? R.color.expenseColor : R.color.incomeColor);
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {

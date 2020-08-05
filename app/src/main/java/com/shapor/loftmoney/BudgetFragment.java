@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -206,7 +208,7 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-
+                            removeItems();
                         }
                     })
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -217,6 +219,30 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
                     }).show();
         }
         return true;
+    }
+
+    private void removeItems() {
+        String token = ((LoftApp) getActivity().getApplication()).getSharedPreferences().getString(LoftApp.TOKEN_KEY, "");
+        List<Integer> selectedItems = moneyAdapter.getSelectedItemIds();
+        for (Integer itemId : selectedItems) {
+            Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().removeMoney(token, String.valueOf(itemId.intValue()))
+                    .subscribeOn(Schedulers.computation())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action() {
+                        @Override
+                        public void run() throws Exception {
+                            Log.e("TAG COMPLETE", "Complete");
+                            moneyAdapter.notifyDataSetChanged();
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            Log.e("TAG ERROR", throwable.getLocalizedMessage());
+                        }
+                    });
+            compositeDisposable.add(disposable);
+        }
+
     }
 
     @Override

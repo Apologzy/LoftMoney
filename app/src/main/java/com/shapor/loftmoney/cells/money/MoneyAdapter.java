@@ -53,6 +53,18 @@ public class MoneyAdapter extends RecyclerView.Adapter<MoneyAdapter.MoneyViewHol
         return result;
     }
 
+    public List<Integer> getSelectedItemIds() {
+        List<Integer> result = new ArrayList<>();
+        int i = 0;
+        for (MoneyCellModel item: moneyCellModels) {
+            if (mSelectedItems.get(i)) {
+                result.add(item.getId());
+            }
+            i++;
+        }
+        return result;
+    }
+
     public void setListener(ItemsAdapterListener listener) {
         mListener = listener;
     }
