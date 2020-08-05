@@ -5,27 +5,26 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BudgetPagerAdapter extends FragmentPagerAdapter {
 
-    public BudgetPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+    private List<Fragment> fragments = new ArrayList<>();
+
+    public BudgetPagerAdapter(@NonNull FragmentManager fm, int behavior, List<Fragment> fragments) {
         super(fm, behavior);
+        this.fragments = fragments;
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                return new ExpensesFragment();
-            case 1:
-                return new IncomeFragment();
-            default:
-                return null;
-        }
+        return fragments.get(position);
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return fragments.size();
     }
 }

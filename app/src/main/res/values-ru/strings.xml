@@ -10,4 +10,7 @@
     <string name="income">Доходы</string>
     <string name="mscr_btn_add">Кнопка добавить</string>
     <string name="budget_accounting">Учет бюджета</string>
+    <string name="selected">Выделено: %1$s</string>
+    <string name="remove">Удалить</string>
+    <string name="confirmation">Вы действительно хотите удалить выбранные пункты?</string>
 </resources>
