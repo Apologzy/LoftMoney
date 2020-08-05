@@ -1,5 +1,6 @@
 package com.shapor.loftmoney.cells.money;
 
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,42 @@ public class MoneyAdapter extends RecyclerView.Adapter<MoneyAdapter.MoneyViewHol
 
     private List<MoneyCellModel> moneyCellModels = new ArrayList<>();
     private MoneyAdapterClick moneyAdapterClick;
+    private ItemsAdapterListener mListener;
+
+    private SparseBooleanArray mSelectedItems = new SparseBooleanArray();
+
+    public void clearSelections() {
+        mSelectedItems.clear();
+        notifyDataSetChanged();
+    }
+
+    public void toggleItem(int position) {
+        mSelectedItems.put(position, !mSelectedItems.get(position));
+        notifyDataSetChanged();
+    }
+
+    public void clearItem(int position) {
+        mSelectedItems.put(position, false);
+        notifyDataSetChanged();
+    }
+
+    public boolean isSelected (int position) {
+       return mSelectedItems.get(position);
+    }
+
+    public int getSelectedSize() {
+        int result = 0;
+        for (int i = 0; i < mSelectedItems.size() ; i++) {
+            if(mSelectedItems.get(i)) {
+                result++;
+            }
+        }
+        return result;
+    }
+
+    public void setListener(ItemsAdapterListener listener) {
+        mListener = listener;
+    }
 
     public void setMoneyAdapterClick(MoneyAdapterClick moneyAdapterClick) {
         this.moneyAdapterClick = moneyAdapterClick;
@@ -53,7 +90,8 @@ public class MoneyAdapter extends RecyclerView.Adapter<MoneyAdapter.MoneyViewHol
 
     @Override
     public void onBindViewHolder(@NonNull MoneyViewHolder holder, int position) {
-        holder.bind(moneyCellModels.get(position));
+        holder.bind(moneyCellModels.get(position), mSelectedItems.get(position));
+        holder.setListener(mListener, moneyCellModels.get(position), position);
     }
 
     @Override
@@ -62,18 +100,21 @@ public class MoneyAdapter extends RecyclerView.Adapter<MoneyAdapter.MoneyViewHol
     }
 
     public static class MoneyViewHolder extends RecyclerView.ViewHolder {
+        private View mItemView;
         TextView nameView;
         TextView valueView;
         MoneyAdapterClick moneyAdapterClick;
 
         public MoneyViewHolder(MoneyAdapterClick moneyAdapterClick, @NonNull View itemView) {
             super(itemView);
+            mItemView = itemView;
             this.moneyAdapterClick = moneyAdapterClick;
             nameView = itemView.findViewById(R.id.cellMoneyNameView);
             valueView = itemView.findViewById(R.id.cellMoneyValueView);
         }
 
-        public void bind(final MoneyCellModel moneyCellModel) {
+        public void bind(final MoneyCellModel moneyCellModel, boolean isSelected) {
+            mItemView.setSelected(isSelected);
             nameView.setText(moneyCellModel.getName());
             valueView.setText(moneyCellModel.getValue());
             valueView.setTextColor(ContextCompat.getColor(valueView.getContext(), moneyCellModel.getColor()));
@@ -86,6 +127,25 @@ public class MoneyAdapter extends RecyclerView.Adapter<MoneyAdapter.MoneyViewHol
                     }
                 }
             });
+        }
+
+        public void setListener(ItemsAdapterListener listener, MoneyCellModel item, int position) {
+
+            mItemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(item, position);
+                }
+            });
+
+            mItemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    listener.onItemLongClick(item, position);
+                    return false;
+                }
+            });
+
         }
 
     }

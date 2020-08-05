@@ -1,6 +1,9 @@
 package com.shapor.loftmoney;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -8,6 +11,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,6 +25,7 @@ public class MainScreen extends AppCompatActivity {
 
     protected TabLayout tabLayout;
     protected ViewPager viewPager;
+    protected Toolbar mToolbar;
     protected FloatingActionButton floatingActionButton;
 
     @Override
@@ -38,6 +43,7 @@ public class MainScreen extends AppCompatActivity {
 
         floatingActionButton = findViewById(R.id.fab);
         tabLayout = findViewById(R.id.tabs);
+        mToolbar = findViewById(R.id.toolbar);
         viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new BudgetPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,fragments));
 
@@ -64,6 +70,21 @@ public class MainScreen extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    @Override
+    public void onActionModeStarted(ActionMode mode) {
+        super.onActionModeStarted(mode);
+        tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.dark_gray_blue));
+        mToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.dark_gray_blue));
+    }
+
+    @Override
+    public void onActionModeFinished(ActionMode mode) {
+        super.onActionModeFinished(mode);
+        tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.lightish_blue));
+        mToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.lightish_blue));
     }
 
     @Override

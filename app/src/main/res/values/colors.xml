@@ -17,5 +17,9 @@
     <color name="marigold">#ffc107</color>
     <color name="perrywinkle_70">#b38baaef</color>
     <color name="white_gray">#D8D8D8</color>
-
+    <color name="dark_gray_blue">#333f56</color>
+    <color name="pr_white">#ffffff</color>
+    <color name="pr_black">#000000</color>
+    <color name="medium_gray">#666664</color>
+    <color name="white_five">#f2f2f2</color>
 </resources>
