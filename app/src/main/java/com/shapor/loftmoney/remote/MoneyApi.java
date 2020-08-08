@@ -26,8 +26,9 @@ public interface MoneyApi {
                          @Field("type") String type);
 
     @POST ("./items/remove")
-    @FormUrlEncoded
-    Completable removeMoney(@Field("auth-token") String token,
-                            @Field("id") String id);
+    Completable removeMoney(@Query("id") String id,
+                            @Query("auth-token") String token);
+
+
 
 }

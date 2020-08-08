@@ -76,6 +76,7 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
 
         View view = inflater.inflate(R.layout.fragment_budget,null);
 
+
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         recyclerView = view.findViewById(R.id.costsRecyclerView);
 
@@ -169,6 +170,7 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
                 mActionMode.setTitle(getString(R.string.selected, String.valueOf(moneyAdapter.getSelectedSize())));
             } else {
                 moneyAdapter.clearItem(position);
+                //moneyAdapter.itemSelectedDelete(position);
                 mActionMode.setTitle(getString(R.string.selected, String.valueOf(moneyAdapter.getSelectedSize())));
 
             }
@@ -209,6 +211,7 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             removeItems();
+                            actionMode.finish();
                         }
                     })
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -225,14 +228,14 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
         String token = ((LoftApp) getActivity().getApplication()).getSharedPreferences().getString(LoftApp.TOKEN_KEY, "");
         List<Integer> selectedItems = moneyAdapter.getSelectedItemIds();
         for (Integer itemId : selectedItems) {
-            Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().removeMoney(token, String.valueOf(itemId.intValue()))
+            Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().removeMoney(String.valueOf(itemId.intValue()), token)
                     .subscribeOn(Schedulers.computation())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Action() {
                         @Override
                         public void run() throws Exception {
                             Log.e("TAG COMPLETE", "Complete");
-                            moneyAdapter.notifyDataSetChanged();
+
                         }
                     }, new Consumer<Throwable>() {
                         @Override
@@ -242,6 +245,8 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
                     });
             compositeDisposable.add(disposable);
         }
+        generateExpenses();
+        moneyAdapter.clearSelections();
 
     }
 

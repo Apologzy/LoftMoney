@@ -13,6 +13,7 @@
     <string name="selected">Selected: %1$s</string>
     <string name="remove">Delete</string>
     <string name="confirmation">Are you sure you want to delete the selected items?</string>
+    <string name="balance_finance_title">Available finance</string>
 
 
 </resources>
