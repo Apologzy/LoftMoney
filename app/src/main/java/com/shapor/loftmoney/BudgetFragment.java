@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.shapor.loftmoney.cells.money.ItemsAdapterListener;
 import com.shapor.loftmoney.cells.money.MoneyAdapter;
 import com.shapor.loftmoney.cells.money.MoneyAdapterClick;
@@ -48,7 +49,7 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
-
+    protected FloatingActionButton floatingActionButton;
 
 
     public static BudgetFragment newInstance(String fragmentType) {
@@ -76,7 +77,7 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
 
         View view = inflater.inflate(R.layout.fragment_budget,null);
 
-
+        floatingActionButton = view.findViewById(R.id.fab);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         recyclerView = view.findViewById(R.id.costsRecyclerView);
 
@@ -90,22 +91,31 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
 
         moneyAdapter = new MoneyAdapter();
         moneyAdapter.setListener(this);
-        /*
-        moneyAdapter.setMoneyAdapterClick(new MoneyAdapterClick() {
-            @Override
-            public void onMoneyClick(MoneyCellModel moneyCellModel) {
-                Intent intent = new Intent(getContext(), AddItemActivity.class);
-                startActivity(intent);
-            }
-        });
 
-         */
 
         recyclerView.setAdapter(moneyAdapter);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,
                 false));
 
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int activeFragmentIndex = (fragmentType.equals("expense")) ? 0 : 1;
+                String test = Integer.toString(activeFragmentIndex);
+                Intent intent = new Intent(getActivity(), AddItemActivity.class);
+                intent.putExtra("activeIndex", test);
+                try {
+                    startActivity(intent);
+                    Log.e("TAG TRUE", "WE ARE !!!");
+                    getActivity().finish();
+                }catch (Exception e) {
+                    Log.e("TAG ERR", e.getMessage());
+                }
+
+
+            }
+        });
 
         return view;
     }
@@ -182,6 +192,7 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
     public void onItemLongClick(MoneyCellModel item, int position) {
         if (mActionMode == null) {
             getActivity().startActionMode(this);
+            floatingActionButton.setVisibility(View.GONE);
         }
         moneyAdapter.toggleItem(position);
         if(mActionMode != null) {
@@ -254,5 +265,6 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
     public void onDestroyActionMode(ActionMode actionMode) {
         mActionMode = null;
         moneyAdapter.clearSelections();
+        floatingActionButton.setVisibility(View.VISIBLE);
     }
 }

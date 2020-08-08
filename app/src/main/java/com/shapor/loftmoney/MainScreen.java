@@ -26,7 +26,7 @@ public class MainScreen extends AppCompatActivity {
     protected TabLayout tabLayout;
     protected ViewPager viewPager;
     protected Toolbar mToolbar;
-    protected FloatingActionButton floatingActionButton;
+    //protected FloatingActionButton floatingActionButton;
 
 
     @Override
@@ -42,7 +42,7 @@ public class MainScreen extends AppCompatActivity {
         //fragments.add(new BudgetFragment("income"));
 
 
-        floatingActionButton = findViewById(R.id.fab);
+        //floatingActionButton = findViewById(R.id.fab);
         tabLayout = findViewById(R.id.tabs);
         mToolbar = findViewById(R.id.toolbar);
         viewPager = findViewById(R.id.viewpager);
@@ -54,6 +54,7 @@ public class MainScreen extends AppCompatActivity {
         tabLayout.getTabAt(2).setText("Balance");
 
         //Костыль для сокрытие кнопки в Баланс Фрагменте
+        /*
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -75,24 +76,9 @@ public class MainScreen extends AppCompatActivity {
             }
         });
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int activeFragmentIndex = viewPager.getCurrentItem();
-                String test = Integer.toString(activeFragmentIndex);
-                Intent intent = new Intent(MainScreen.this, AddItemActivity.class);
-                intent.putExtra("activeIndex", test);
-                try {
-                    startActivity(intent);
-                    Log.e("TAG TRUE", "WE ARE !!!");
-                    finish();
-                }catch (Exception e) {
-                    Log.e("TAG ERR", e.getMessage());
-                }
+         */
 
 
-            }
-        });
 
     }
 
