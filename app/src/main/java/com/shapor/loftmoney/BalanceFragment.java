@@ -122,8 +122,6 @@ public class BalanceFragment extends Fragment {
 
     private void totalExpense () {
 
-
-
         String token = ((LoftApp) getActivity().getApplication()).getSharedPreferences().getString(LoftApp.TOKEN_KEY, "");
 
         Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().getMoney(token, "expense")
@@ -150,12 +148,9 @@ public class BalanceFragment extends Fragment {
         compositeDisposable.add(disposable);
 
 
-
-
     }
 
     private void totalIncome () {
-
 
         String token = ((LoftApp) getActivity().getApplication()).getSharedPreferences().getString(LoftApp.TOKEN_KEY, "");
 
@@ -182,9 +177,9 @@ public class BalanceFragment extends Fragment {
                 });
         compositeDisposable.add(disposable);
 
-
-
     }
 
+
+    
 
 }
