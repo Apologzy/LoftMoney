@@ -28,6 +28,7 @@ public class MainScreen extends AppCompatActivity {
     protected Toolbar mToolbar;
     protected FloatingActionButton floatingActionButton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +37,7 @@ public class MainScreen extends AppCompatActivity {
         List<Fragment> fragments = new ArrayList<>(2);
         fragments.add(BudgetFragment.newInstance("expense"));
         fragments.add(BudgetFragment.newInstance("income"));
-        //fragments.add(new BudgetFragment("expense"));
-        //fragments.add(new BudgetFragment("income"));
+        fragments.add(BalanceFragment.newInstance("balance"));
 
 
 
@@ -50,10 +50,37 @@ public class MainScreen extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setText(R.string.expenses);
         tabLayout.getTabAt(1).setText(R.string.income);
+        tabLayout.getTabAt(2).setText("Balance");
+
+
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if(tab.getPosition() == 2) {
+                    floatingActionButton.setVisibility(View.GONE);
+                } else {
+                    floatingActionButton.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 int activeFragmentIndex = viewPager.getCurrentItem();
                 String test = Integer.toString(activeFragmentIndex);
                 Intent intent = new Intent(MainScreen.this, AddItemActivity.class);
@@ -78,6 +105,7 @@ public class MainScreen extends AppCompatActivity {
         super.onActionModeStarted(mode);
         tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.dark_gray_blue));
         mToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.dark_gray_blue));
+        floatingActionButton.setVisibility(View.GONE);
     }
 
     @Override
@@ -85,7 +113,11 @@ public class MainScreen extends AppCompatActivity {
         super.onActionModeFinished(mode);
         tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.lightish_blue));
         mToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.lightish_blue));
+        floatingActionButton.setVisibility(View.VISIBLE);
     }
+
+
+
 
     @Override
     public void onBackPressed() {

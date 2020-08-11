@@ -13,6 +13,9 @@
     <string name="selected">Selected: %1$s</string>
     <string name="remove">Delete</string>
     <string name="confirmation">Are you sure you want to delete the selected items?</string>
+    <string name="balance_finance_title">Available finance</string>
+    <string name="edit_txtname_error">The number of characters must be less than 30</string>
+    <string name="edit_txtprice_error">The number of characters must be less than 9</string>
 
 
 </resources>

@@ -34,6 +34,10 @@ public class MoneyAdapter extends RecyclerView.Adapter<MoneyAdapter.MoneyViewHol
         notifyDataSetChanged();
     }
 
+    public  void itemSelectedDelete (int position) {
+        mSelectedItems.delete(position);
+    }
+
     public void clearItem(int position) {
         mSelectedItems.put(position, false);
         notifyDataSetChanged();
@@ -43,12 +47,46 @@ public class MoneyAdapter extends RecyclerView.Adapter<MoneyAdapter.MoneyViewHol
        return mSelectedItems.get(position);
     }
 
+
     public int getSelectedSize() {
         int result = 0;
-        for (int i = 0; i < mSelectedItems.size() ; i++) {
+
+        for (int i = 0; i < moneyCellModels.size() ; i++) {
             if(mSelectedItems.get(i)) {
                 result++;
             }
+        }
+        return result;
+    }
+
+    public int getSelectedSizeOld(int position) {
+        int result = 0;
+
+        for (int i = 0; i < mSelectedItems.size() ; i++) {
+            if(mSelectedItems.size() == 1) {
+                if (mSelectedItems.get(position)) {
+                    result++;
+                }
+
+            } else {
+                if(mSelectedItems.get(i)) {
+                    result++;
+                }
+            }
+
+        }
+
+        return result;
+    }
+
+    public List<Integer> getSelectedItemIds() {
+        List<Integer> result = new ArrayList<>();
+        int i = 0;
+        for (MoneyCellModel item: moneyCellModels) {
+            if (mSelectedItems.get(i)) {
+                result.add(item.getId());
+            }
+            i++;
         }
         return result;
     }

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.shapor.loftmoney.cells.money.ItemsAdapterListener;
 import com.shapor.loftmoney.cells.money.MoneyAdapter;
 import com.shapor.loftmoney.cells.money.MoneyAdapterClick;
@@ -33,6 +35,7 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
@@ -87,21 +90,13 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
 
         moneyAdapter = new MoneyAdapter();
         moneyAdapter.setListener(this);
-        /*
-        moneyAdapter.setMoneyAdapterClick(new MoneyAdapterClick() {
-            @Override
-            public void onMoneyClick(MoneyCellModel moneyCellModel) {
-                Intent intent = new Intent(getContext(), AddItemActivity.class);
-                startActivity(intent);
-            }
-        });
 
-         */
 
         recyclerView.setAdapter(moneyAdapter);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,
                 false));
+
 
 
         return view;
@@ -125,7 +120,7 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
                         for (MoneyItem moneyItem : moneyItems) {
                             moneyCellModels.add(MoneyCellModel.getInstance(moneyItem));
                         }
-                        //Collections.reverse(moneyCellModels);
+
                         moneyAdapter.setData(moneyCellModels);
 
                         Log.e("TAG", "Success " + moneyItems);
@@ -156,12 +151,9 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
 
     @Override
     public void onItemClick(MoneyCellModel item, int position) {
-//        if(moneyAdapter.isSelected(position)) {
-//            moneyAdapter.clearItem(position);
-//        }
 
         if(mActionMode != null) {
-            //mActionMode.setTitle(getString(R.string.selected, String.valueOf(moneyAdapter.getSelectedSize())));
+
             if (!moneyAdapter.isSelected(position)) {
                 moneyAdapter.toggleItem(position);
                 mActionMode.setTitle(getString(R.string.selected, String.valueOf(moneyAdapter.getSelectedSize())));
@@ -178,6 +170,7 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
     public void onItemLongClick(MoneyCellModel item, int position) {
         if (mActionMode == null) {
             getActivity().startActionMode(this);
+
         }
         moneyAdapter.toggleItem(position);
         if(mActionMode != null) {
@@ -206,7 +199,8 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-
+                            removeItems();
+                            actionMode.finish();
                         }
                     })
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -219,9 +213,36 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
         return true;
     }
 
+    private void removeItems() {
+        String token = ((LoftApp) getActivity().getApplication()).getSharedPreferences().getString(LoftApp.TOKEN_KEY, "");
+        List<Integer> selectedItems = moneyAdapter.getSelectedItemIds();
+        for (Integer itemId : selectedItems) {
+            Disposable disposable = ((LoftApp) getActivity().getApplication()).getMoneyApi().removeMoney(String.valueOf(itemId.intValue()), token)
+                    .subscribeOn(Schedulers.computation())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action() {
+                        @Override
+                        public void run() throws Exception {
+                            Log.e("TAG COMPLETE", "Complete");
+
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            Log.e("TAG ERROR", throwable.getLocalizedMessage());
+                        }
+                    });
+            compositeDisposable.add(disposable);
+        }
+        generateExpenses();
+        moneyAdapter.clearSelections();
+
+    }
+
     @Override
     public void onDestroyActionMode(ActionMode actionMode) {
         mActionMode = null;
         moneyAdapter.clearSelections();
+
     }
 }

@@ -130,6 +130,10 @@ public class AddItemActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int count, int after) {
                 name = charSequence.toString();
+                if(name.length() > 30) {
+                    mNameEditText.setError(getString(R.string.edit_txtname_error));
+                    name = "";
+                }
                 checkInputs();
             }
 
@@ -148,6 +152,10 @@ public class AddItemActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int count, int after) {
                 value = charSequence.toString();
+                if(value.length() > 8) {
+                    mPriceEditText.setError(getString(R.string.edit_txtprice_error));
+                    value = "";
+                }
                 checkInputs();
             }
 
