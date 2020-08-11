@@ -38,8 +38,7 @@ public class MainScreen extends AppCompatActivity {
         fragments.add(BudgetFragment.newInstance("expense"));
         fragments.add(BudgetFragment.newInstance("income"));
         fragments.add(BalanceFragment.newInstance("balance"));
-        //fragments.add(new BudgetFragment("expense"));
-        //fragments.add(new BudgetFragment("income"));
+
 
 
         floatingActionButton = findViewById(R.id.fab);
@@ -53,7 +52,7 @@ public class MainScreen extends AppCompatActivity {
         tabLayout.getTabAt(1).setText(R.string.income);
         tabLayout.getTabAt(2).setText("Balance");
 
-        //Костыль для сокрытие кнопки в Баланс Фрагменте
+
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -81,7 +80,7 @@ public class MainScreen extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //int activeFragmentIndex = (fragmentType.equals("expense")) ? 0 : 1;
+
                 int activeFragmentIndex = viewPager.getCurrentItem();
                 String test = Integer.toString(activeFragmentIndex);
                 Intent intent = new Intent(MainScreen.this, AddItemActivity.class);

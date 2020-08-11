@@ -14,4 +14,6 @@
     <string name="remove">Удалить</string>
     <string name="confirmation">Вы действительно хотите удалить выбранные пункты?</string>
     <string name="balance_finance_title">Доступные финансы</string>
+    <string name="edit_txtname_error">Количество символов должно быть меньше 30</string>
+    <string name="edit_txtprice_error">Количество символов должно быть меньше 9</string>
 </resources>

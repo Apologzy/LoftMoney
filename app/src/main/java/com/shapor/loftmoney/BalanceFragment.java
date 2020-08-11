@@ -88,7 +88,7 @@ public class BalanceFragment extends Fragment {
 
         float expense = this.expense;
         float income =  this.income;
-        float balance = expense + income;
+        float balance = income - expense;
 
         tvBalanceValue.setText(String.valueOf((int) balance)  + "₽");
         tvIncomeValue.setText(String.valueOf((int) income) + "₽");

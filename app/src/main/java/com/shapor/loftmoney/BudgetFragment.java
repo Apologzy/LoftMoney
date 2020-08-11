@@ -49,7 +49,7 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
     RecyclerView recyclerView;
     SwipeRefreshLayout swipeRefreshLayout;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
-    //protected FloatingActionButton floatingActionButton;
+
 
 
     public static BudgetFragment newInstance(String fragmentType) {
@@ -77,7 +77,6 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
 
         View view = inflater.inflate(R.layout.fragment_budget,null);
 
-        //floatingActionButton = view.findViewById(R.id.fab);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         recyclerView = view.findViewById(R.id.costsRecyclerView);
 
@@ -98,27 +97,7 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,
                 false));
 
-        /*
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int activeFragmentIndex = (fragmentType.equals("expense")) ? 0 : 1;
-                String test = Integer.toString(activeFragmentIndex);
-                Intent intent = new Intent(getActivity(), AddItemActivity.class);
-                intent.putExtra("activeIndex", test);
-                try {
-                    startActivity(intent);
-                    Log.e("TAG TRUE", "WE ARE !!!");
-                    getActivity().finish();
-                }catch (Exception e) {
-                    Log.e("TAG ERR", e.getMessage());
-                }
 
-
-            }
-        });
-
-         */
 
         return view;
     }
@@ -141,7 +120,7 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
                         for (MoneyItem moneyItem : moneyItems) {
                             moneyCellModels.add(MoneyCellModel.getInstance(moneyItem));
                         }
-                        //Collections.reverse(moneyCellModels);
+
                         moneyAdapter.setData(moneyCellModels);
 
                         Log.e("TAG", "Success " + moneyItems);
@@ -172,18 +151,14 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
 
     @Override
     public void onItemClick(MoneyCellModel item, int position) {
-//        if(moneyAdapter.isSelected(position)) {
-//            moneyAdapter.clearItem(position);
-//        }
 
         if(mActionMode != null) {
-            //mActionMode.setTitle(getString(R.string.selected, String.valueOf(moneyAdapter.getSelectedSize())));
+
             if (!moneyAdapter.isSelected(position)) {
                 moneyAdapter.toggleItem(position);
                 mActionMode.setTitle(getString(R.string.selected, String.valueOf(moneyAdapter.getSelectedSize())));
             } else {
                 moneyAdapter.clearItem(position);
-                //moneyAdapter.itemSelectedDelete(position);
                 mActionMode.setTitle(getString(R.string.selected, String.valueOf(moneyAdapter.getSelectedSize())));
 
             }
@@ -195,7 +170,7 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
     public void onItemLongClick(MoneyCellModel item, int position) {
         if (mActionMode == null) {
             getActivity().startActionMode(this);
-            //floatingActionButton.setVisibility(View.GONE);
+
         }
         moneyAdapter.toggleItem(position);
         if(mActionMode != null) {
@@ -268,6 +243,6 @@ public class BudgetFragment extends Fragment implements ItemsAdapterListener, Ac
     public void onDestroyActionMode(ActionMode actionMode) {
         mActionMode = null;
         moneyAdapter.clearSelections();
-       // floatingActionButton.setVisibility(View.VISIBLE);
+
     }
 }
