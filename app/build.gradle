@@ -3,6 +3,9 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
+    lintOptions {
+        checkReleaseBuilds false
+    }
 
     defaultConfig {
         applicationId "com.shapor.loftmoney"
@@ -20,8 +23,16 @@ android {
     }
 
     buildTypes {
+
+        debug {
+            buildConfigField("String", "URL", "\"https://loftschool.com/android-api/basic/v1/\"")
+            resValue("string", "app_name", "LoftMoney-Debug")
+        }
+
         release {
-            minifyEnabled false
+            buildConfigField("String", "URL", "\"https://loftschool.com/android-api/basic/v1/\"")
+            resValue("string", "app_name", "LoftMoney")
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

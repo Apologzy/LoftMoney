@@ -1,6 +1,7 @@
 package com.shapor.loftmoney;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
@@ -14,27 +15,52 @@ public class BalanceView extends View {
     private float expenses = 5000;
     private float incomes = 10000;
 
+    private int colorStateExpense;
+    private int colorStateIncome;
+
+    private int exp = ContextCompat.getColor(getContext(), R.color.expenseColor);
+    private int inc = ContextCompat.getColor(getContext(), R.color.incomeColor);
+
     private Paint expensePaint = new Paint();
     private Paint incomePaint = new Paint();
 
+
+
     public BalanceView(Context context) {
         super(context);
-        init();
+
+       // init();
     }
 
     public BalanceView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.BalanceView);
+        int expColor = a.getColor(R.styleable.BalanceView_colorStateExpenses, ContextCompat.getColor(getContext(), R.color.expenseColor));
+        int intColor = a.getColor(R.styleable.BalanceView_colorStateIncome, ContextCompat.getColor(getContext(), R.color.incomeColor));
+        initColorState(expColor, intColor);
+        a.recycle();
         init();
     }
 
     public BalanceView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.BalanceView);
+        int expColor = a.getColor(R.styleable.BalanceView_colorStateExpenses, ContextCompat.getColor(getContext(), R.color.expenseColor));
+        int intColor = a.getColor(R.styleable.BalanceView_colorStateIncome, ContextCompat.getColor(getContext(), R.color.incomeColor));
+        initColorState(expColor, intColor);
+        a.recycle();
         init();
     }
 
     public BalanceView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.BalanceView);
+        int expColor = a.getColor(R.styleable.BalanceView_colorStateExpenses, ContextCompat.getColor(getContext(), R.color.expenseColor));
+        int intColor = a.getColor(R.styleable.BalanceView_colorStateIncome, ContextCompat.getColor(getContext(), R.color.incomeColor));
+        initColorState(expColor, intColor);
         init();
+        a.recycle();
+        //init();
     }
 
     public void update(float expenses, float incomes) {
@@ -43,9 +69,15 @@ public class BalanceView extends View {
         invalidate();
     }
 
+
+    private void initColorState(int expenseColor, int incomeColor) {
+        this.colorStateExpense = expenseColor;
+        this.colorStateIncome = incomeColor;
+    }
+
     private void init() {
-        expensePaint.setColor(ContextCompat.getColor(getContext(), R.color.expenseColor));
-        incomePaint.setColor(ContextCompat.getColor(getContext(), R.color.incomeColor));
+        expensePaint.setColor(colorStateExpense);
+        incomePaint.setColor(colorStateIncome);
     }
 
     @Override
